@@ -7,7 +7,7 @@ import storage from 'redux-persist/lib/storage';
 import {combineReducers} from 'redux';
 import {persistReducer} from 'redux-persist'
 import thunk from 'redux-thunk';
-import persistReducer from 'redux-persist/es/persistReducer';
+// import persistReducer from 'redux-persist/es/persistReducer';
 
 const reducer = combineReducers ({
     user: userSlice,
@@ -21,6 +21,11 @@ const persistConfig = {
     blackList: [appApi.reducerPath, "products"],
 };
 
-const persistReducer = persistReducer(persistConfig, reducer);
+const persistedReducer = persistReducer(persistConfig, reducer);
 
-const store = configStore
+const store = configureStore ({
+    reducer: persistedReducer,
+    middleware: [thunk, appApi.middleware],
+});
+
+export default store;
