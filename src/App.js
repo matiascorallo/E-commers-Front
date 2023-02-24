@@ -8,6 +8,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { useSelector } from 'react-redux';
 import NewProduct from './pages/NewProduct';
+import ProductPage from './pages/ProductPage';
+import CategoryPage from './pages/CategoryPage';
 
 
 
@@ -19,12 +21,16 @@ function App() {
         <Navigation />
         <Routes>
           <Route index element={<Home />} />
-          {!user && 
-          (<>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-          </>
-          )}
+          {!user &&
+            (<>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+            </>
+            )}
+
+
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/category/:category" element={<CategoryPage />} />
 
           <Route path="/new-product" element={<NewProduct />} />
           <Route path="*" element={<Home />} />

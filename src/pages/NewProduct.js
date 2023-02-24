@@ -42,12 +42,11 @@ function NewProduct() {
     });
   }
 
-
   function showWidget() {
     const widget = window.cloudinary.createUploadWidget(
       {
-        cloudName: "davaelph6",
-        uploadPreset: "ecomerce",
+        cloudName: "learn-code-10",
+        uploadPreset: "dcizdwph",
       },
       (error, result) => {
         if (!error && result.event === "success") {
@@ -87,9 +86,8 @@ function NewProduct() {
                 <option disabled>
                   -- Select One --
                 </option>
-                <option value="technology">technology</option>
-                <option value="tablets">tablets</option>
-                <option value="phones">phones</option>
+                T                <option value="Tablets">tablets</option>
+                <option value="Phones">phones</option>
                 <option value="laptops">laptops</option>
               </Form.Select>
             </Form.Group>
@@ -103,7 +101,7 @@ function NewProduct() {
                 {images.map((image) => (
                   <div className="image-preview">
                     <img src={image.url} />
-                    {imgToRemove != image.public_id && <i className="fa fa-times-circle" onClick={() => handleRemoveImg(image)}></i>}
+                    {imgToRemove !== image.public_id && <i className="fa fa-times-circle" onClick={() => handleRemoveImg(image)}></i>}
                   </div>
                 ))}
               </div>
