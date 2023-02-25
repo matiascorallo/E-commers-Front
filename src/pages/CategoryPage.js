@@ -1,10 +1,10 @@
-import axios from '../axios';
-import React, { useEffect, useState } from 'react'
-import { Col, Container, Row, Pagination } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
-import Loading from '../components/Loading';
-import productSlice from '../features/productSlice';
-import ProductPreview from '../components/ProductPreview';
+import axios from "../axios";
+import React, { useEffect, useState } from "react";
+import { Col, Container, Pagination, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import Loading from "../components/Loading";
+import ProductPreview from "../components/ProductPreview";
+import './CategoryPage.css'
 
 
 function CategoryPage() {
@@ -28,7 +28,7 @@ function CategoryPage() {
             });
     }, [category]);
 
-    if (loading) {
+     if (loading) {
         <Loading />;
     }
 
@@ -52,7 +52,9 @@ function CategoryPage() {
                 <Container>
                     <Row>
                         <Col md={{ span: 10, offset: 1 }}>
-                            <Pagination data={productsSearch} RenderComponent={ProductSearch}  />
+                            <div className="d-flex justify-content-center aling-items-center flex-wrap" >
+                                {productsSearch.map(product => <ProductPreview {...product}/>)}
+                            </div>
                         </Col>
                     </Row>
                 </Container>
