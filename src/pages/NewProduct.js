@@ -45,8 +45,8 @@ function NewProduct() {
   function showWidget() {
     const widget = window.cloudinary.createUploadWidget(
       {
-        cloudName: "learn-code-10",
-        uploadPreset: "dcizdwph",
+        cloudName: "davaelph6",
+        uploadPreset: "ecomerce",
       },
       (error, result) => {
         if (!error && result.event === "success") {
@@ -86,9 +86,11 @@ function NewProduct() {
                 <option disabled>
                   -- Select One --
                 </option>
-                T                <option value="Tablets">tablets</option>
+                <option></option>
                 <option value="Phones">phones</option>
-                <option value="laptops">laptops</option>
+                <option value="Laptops">laptops</option>
+                <option value="Technology">technology</option>
+                <option value="Tablets">tablets</option>
               </Form.Select>
             </Form.Group>
 

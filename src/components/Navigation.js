@@ -30,7 +30,18 @@ function Navigation() {
                 <Nav.Link>Login</Nav.Link>
               </LinkContainer>
             )}
-
+            {user && !user.isAdmin && (
+              <LinkContainer to='/cart'>
+              <Nav.Link>
+                <i className='fas fa-shopping-cart'></i>
+                {user?.cart.count > 0 && (
+                  <span className='badge badge-warning' id='ccartcount'>
+                    {user.cart.count}
+                  </span>
+                )}
+              </Nav.Link>
+              </LinkContainer>
+            )}
             {user && (
               <>
                 <Nav.Link style={{ position: "relative" }}>
