@@ -1,18 +1,18 @@
 import axios from "../axios";
 import React, { useEffect, useState } from "react";
-import { Col, Container, Pagination, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import ProductPreview from "../components/ProductPreview";
-import './CategoryPage.css'
+import "./CategoryPage.css";
 
 
 function CategoryPage() {
-
     const { category } = useParams();
     const [loading, setLoading] = useState(false);
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+
 
     useEffect(() => {
         setLoading(true);
@@ -28,7 +28,7 @@ function CategoryPage() {
             });
     }, [category]);
 
-     if (loading) {
+    if (loading) {
         <Loading />;
     }
 
@@ -53,7 +53,7 @@ function CategoryPage() {
                     <Row>
                         <Col md={{ span: 10, offset: 1 }}>
                             <div className="d-flex justify-content-center aling-items-center flex-wrap" >
-                                {productsSearch.map(product => <ProductPreview {...product}/>)}
+                                {productsSearch.map(product => <ProductPreview {...product} />)}
                             </div>
                         </Col>
                     </Row>

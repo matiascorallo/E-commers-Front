@@ -1,8 +1,14 @@
-import React from 'react'
-import { Alert, Col, Container, Row, Table } from 'react-bootstrap';
-import { useSelector } from 'react-redux'
-import { useIncreaseCartProductMutation, useDecreaseCartProductMutation, useRemoveFromCartMutation } from '../services/appApi';
-import './CartPage.css'
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import React from "react";
+import { Alert, Col, Container, Row, Table } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import CheckoutForm from "../components/CheckoutForm";
+import { useIncreaseCartProductMutation, useDecreaseCartProductMutation, useRemoveFromCartMutation } from "../services/appApi";
+import "./CartPage.css";
+
+const stripePromise = loadStripe("pk_live_51Mhb1fKG8BFPEebud8drOJC0YxeWT6JBeJYn5RaPjizGQLnKHD0CgGyesY4GjRqQjN5BHttt8a8jB5pt45dHVBFE00rSozTRDi");
+
 
 function CartPage() {
     const user = useSelector((state) => state.user);
@@ -12,6 +18,7 @@ function CartPage() {
     const [increaseCart] = useIncreaseCartProductMutation();
     const [decreaseCart] = useDecreaseCartProductMutation();
     const [removeFromCart, { isLoading }] = useRemoveFromCartMutation();
+
 
     function handleDecrease(product) {
         const quantity = user.cart.count;
@@ -23,16 +30,18 @@ function CartPage() {
     return (
         <Container style={{ minHeight: "95vh" }} className="cart-container">
             <Row>
-                <Col md={7}>
+                <Col>
                     <h1 className="pt-2 h3">Shopping cart</h1>
                     {cart.length == 0 ? (
                         <Alert variant="info">Shopping cart is empty. Add products to your cart</Alert>
+
                     ) : (
-                        <div>Payment here</div>
-                    )
-                    }
+                        <Elements stripe={stripePromise}>
+                            <CheckoutForm />
+                        </Elements>
+                    )}
                 </Col>
-                <Col md={5}>
+                <Col>
                     {cart.length > 0 && (
                         <>
                             <Table responsive="" className='cart-table' >

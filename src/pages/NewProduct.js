@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { Alert, Col, Container, Form, Row, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useCreateProductMutation } from "../services/appApi";
-import "./NewProduct.css";
 import axios from "../axios";
+import "./NewProduct.css";
 
 function NewProduct() {
-
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -22,14 +21,13 @@ function NewProduct() {
       .delete(`/images/${imgObj.public_id}/`)
       .then((res) => {
         setImgToRemove(null);
-        setImages(prev => prev.filter((img) => img.public_id !== imgObj.public_id))
-      }).catch((e) => console.log(e));
+        setImages((prev) => prev.filter((img) => img.public_id !== imgObj.public_id));
+      })
+      .catch((e) => console.log(e));
   }
 
-  function handleSumbit(e) {
-
+  function handleSubmit(e) {
     e.preventDefault();
-
     if (!name || !description || !price || !category || !images.length) {
       return alert("Please fill out all the fields");
     }
@@ -61,7 +59,7 @@ function NewProduct() {
     <Container>
       <Row>
         <Col md={6} className="new-product__form--container">
-          <Form style={{ width: "100%" }} onSubmit={handleSumbit}>
+          <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
             <h1 className="mt-4">Create a product</h1>
             {isSuccess && <Alert variant="success">Product created with succcess</Alert>}
             {isError && <Alert variant="danger">{error.data}</Alert>}
@@ -83,17 +81,14 @@ function NewProduct() {
             <Form.Group className="mb-3" onChange={(e) => setCategory(e.target.value)}>
               <Form.Label>Category</Form.Label>
               <Form.Select>
-                <option disabled>
+                <option disabled selected>
                   -- Select One --
                 </option>
-                <option></option>
+                <option value="technology">technology</option>
                 <option value="Phones">phones</option>
                 <option value="Laptops">laptops</option>
-                <option value="Technology">technology</option>
-                <option value="Tablets">tablets</option>
               </Form.Select>
             </Form.Group>
-
 
             <Form.Group className="mb-3">
               <Button type="button" onClick={showWidget}>
@@ -103,27 +98,23 @@ function NewProduct() {
                 {images.map((image) => (
                   <div className="image-preview">
                     <img src={image.url} />
-                    {imgToRemove !== image.public_id && <i className="fa fa-times-circle" onClick={() => handleRemoveImg(image)}></i>}
+                    {imgToRemove != image.public_id && <i className="fa fa-times-circle" onClick={() => handleRemoveImg(image)}></i>}
                   </div>
                 ))}
               </div>
             </Form.Group>
 
             <Form.Group>
-              <Button className="mb-3" type='sumbit' disabled={isLoading || isSuccess}>
+              <Button type="submit" disabled={isLoading || isSuccess}>
                 Create Product
               </Button>
             </Form.Group>
-
-
           </Form>
         </Col>
-
         <Col md={6} className="new-product__image--container"></Col>
       </Row>
     </Container>
-
-  )
+  );
 }
 
 export default NewProduct;

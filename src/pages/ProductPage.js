@@ -1,20 +1,20 @@
-import axios from '../axios';
-import React, { useEffect, useState } from 'react'
-import AliceCarousel from 'react-alice-carousel';
-import 'react-alice-carousel/lib/alice-carousel.css'
-import { Badge, Button, ButtonGroup, Col, Container, Form, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom'
-import Loading from '../components/Loading';
-import SimilarProduct from '../components/SimilarProduct';
-import './ProductPage.css'
-import { LinkContainer } from 'react-router-bootstrap';
-import { useAddToCartMutation } from '../services/appApi';
-import ToastMessage from '../components/ToastMessage';
+import axios from "../axios";
+import React, { useEffect, useState } from "react";
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
+import { Container, Row, Col, Badge, ButtonGroup, Form, Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import Loading from "../components/Loading";
+import SimilarProduct from "../components/SimilarProduct";
+import "./ProductPage.css";
+import { LinkContainer } from "react-router-bootstrap";
+import { useAddToCartMutation } from "../services/appApi";
+import ToastMessage from "../components/ToastMessage";
 
 function ProductPage() {
     const { id } = useParams();
-    const user = useSelector(state => state.user);
+    const user = useSelector((state) => state.user);
     const [product, setProduct] = useState(null);
     const [similar, setSimilar] = useState(null);
     const [addToCart, { isSuccess }] = useAddToCartMutation();
@@ -46,7 +46,6 @@ function ProductPage() {
             </div>
         ));
     }
-
 
     return (
         <Container className="pt-4" style={{ position: "relative" }}>
@@ -93,7 +92,6 @@ function ProductPage() {
             </div>
         </Container>
     );
-
 }
 
-export default ProductPage
+export default ProductPage;
