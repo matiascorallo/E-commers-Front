@@ -7,8 +7,7 @@ import CheckoutForm from "../components/CheckoutForm";
 import { useIncreaseCartProductMutation, useDecreaseCartProductMutation, useRemoveFromCartMutation } from "../services/appApi";
 import "./CartPage.css";
 
-const stripePromise = loadStripe("pk_live_51Mhb1fKG8BFPEebud8drOJC0YxeWT6JBeJYn5RaPjizGQLnKHD0CgGyesY4GjRqQjN5BHttt8a8jB5pt45dHVBFE00rSozTRDi");
-
+const stripePromise = loadStripe("pk_test_51Mhb1fKG8BFPEebuBMmq6OCCStSBCethNJFt2cvsqWxR3sngLFgEwEjZ3pApebaZxsFhEGzTGeqGC34MoZYWShLg004CZthsXP");
 
 function CartPage() {
     const user = useSelector((state) => state.user);
@@ -19,13 +18,11 @@ function CartPage() {
     const [decreaseCart] = useDecreaseCartProductMutation();
     const [removeFromCart, { isLoading }] = useRemoveFromCartMutation();
 
-
     function handleDecrease(product) {
         const quantity = user.cart.count;
         if (quantity <= 0) return alert("Can't proceed");
         decreaseCart(product);
     }
-
 
     return (
         <Container style={{ minHeight: "95vh" }} className="cart-container">
@@ -34,17 +31,16 @@ function CartPage() {
                     <h1 className="pt-2 h3">Shopping cart</h1>
                     {cart.length == 0 ? (
                         <Alert variant="info">Shopping cart is empty. Add products to your cart</Alert>
-
                     ) : (
                         <Elements stripe={stripePromise}>
                             <CheckoutForm />
                         </Elements>
                     )}
                 </Col>
-                <Col>
-                    {cart.length > 0 && (
+                {cart.length > 0 && (
+                    <Col md={5}>
                         <>
-                            <Table responsive="" className='cart-table' >
+                            <Table className="cart-table">
                                 <thead>
                                     <tr>
                                         <th>&nbsp;</th>
@@ -55,6 +51,7 @@ function CartPage() {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {/* loop through cart products */}
                                     {cart.map((item) => (
                                         <tr>
                                             <td>&nbsp;</td>
@@ -79,11 +76,11 @@ function CartPage() {
                                 <h3 className="h4 pt-4">Total: ${user.cart.total}</h3>
                             </div>
                         </>
-                    )}
-                </Col>
+                    </Col>
+                )}
             </Row>
         </Container>
-    )
+    );
 }
 
-export default CartPage
+export default CartPage;
