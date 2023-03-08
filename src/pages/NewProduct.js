@@ -84,9 +84,9 @@ function NewProduct() {
                 <option disabled selected>
                   -- Select One --
                 </option>
-                <option value="Technology">technology</option>
-                <option value="Phones">phones</option>
-                <option value="Laptops">laptops</option>
+                <option value="technology">technology</option>
+                <option value="phones">phones</option>
+                <option value="laptops">laptops</option>
               </Form.Select>
             </Form.Group>
 
