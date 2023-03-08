@@ -13,6 +13,7 @@ import CategoryPage from "./pages/CategoryPage";
 import ScrollToTop from "./components/ScrollToTop";
 import CartPage from "./pages/CartPage";
 import OrdersPage from "./pages/OrdersPage";
+import AdminDashboard from "./pages/AdminDashboard";
 
 
 
@@ -43,7 +44,7 @@ function App() {
           )}
           {user && user.isAdmin && (
             <>
-              
+               <Route path="/admin" element={<AdminDashboard />} />
             </>
           )}
           <Route path="/product/:id" element={<ProductPage />} />
