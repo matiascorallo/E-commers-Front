@@ -5,14 +5,13 @@ import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import ProductPreview from "../components/ProductPreview";
 import "./CategoryPage.css";
-
+import Pagination from "../components/Pagination";
 
 function CategoryPage() {
     const { category } = useParams();
     const [loading, setLoading] = useState(false);
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
-
 
     useEffect(() => {
         setLoading(true);
@@ -52,9 +51,7 @@ function CategoryPage() {
                 <Container>
                     <Row>
                         <Col md={{ span: 10, offset: 1 }}>
-                            <div className="d-flex justify-content-center aling-items-center flex-wrap" >
-                                {productsSearch.map(product => <ProductPreview {...product} />)}
-                            </div>
+                            <Pagination data={productsSearch} RenderComponent={ProductSearch} pageLimit={1} dataLimit={10} tablePagination={false} />
                         </Col>
                     </Row>
                 </Container>
@@ -63,5 +60,4 @@ function CategoryPage() {
     );
 }
 
-
-export default CategoryPage
+export default CategoryPage;

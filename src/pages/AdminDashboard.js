@@ -1,17 +1,15 @@
-import React from 'react';
-import axios from '../axios';
-import './AdminDashboard.css'
-import { Col, Container, Nav, Row, Tab } from 'react-bootstrap';
-import DashboardProducts from '../components/DashboardProducts';
-import OrdersAdminPage from '../components/OrdersAdminPage';
-
+import React from "react";
+import { Container, Nav, Tab, Col, Row } from "react-bootstrap";
+import ClientsAdminPage from "../components/ClientsAdminPage";
+import DashboardProducts from "../components/DashboardProducts";
+import OrdersAdminPage from "../components/OrdersAdminPage";
 function AdminDashboard() {
     return (
-        <Container className='mt-3'>
-            <Tab.Container defaultActiveKey="products" >
+        <Container>
+            <Tab.Container defaultActiveKey="products">
                 <Row>
                     <Col sm={3}>
-                        <Nav variant='pills' className='flex-column'>
+                        <Nav variant="pills" className="flex-column">
                             <Nav.Item>
                                 <Nav.Link eventKey="products">Products</Nav.Link>
                             </Nav.Item>
@@ -31,12 +29,15 @@ function AdminDashboard() {
                             <Tab.Pane eventKey="orders">
                                 <OrdersAdminPage />
                             </Tab.Pane>
+                            <Tab.Pane eventKey="clients">
+                                <ClientsAdminPage />
+                            </Tab.Pane>
                         </Tab.Content>
                     </Col>
                 </Row>
             </Tab.Container>
-        </Container >
-    )
+        </Container>
+    );
 }
 
-export default AdminDashboard
+export default AdminDashboard;

@@ -41,7 +41,6 @@ function OrdersPage() {
                         <th>#</th>
                         <th>Status</th>
                         <th>Date</th>
-                        <th>Date</th>
                         <th>Total</th>
                     </tr>
                 </thead>
